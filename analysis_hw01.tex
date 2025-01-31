@@ -1,0 +1,113 @@
+\footline={1/25/2025\hfill Page \folio}
+\noindent
+MATH 503: Homework 1\hfill Robert Nate Crummett
+\smallskip
+\hrule
+\bigskip
+\noindent
+{\bf Problem 1}
+
+\noindent
+Given
+$$\eqalign{\liminf_{k\to\infty} a_k = a &= \lim_{k\to\infty} c_k \qquad c_k = \inf_{j \geq k} a_j\cr \limsup_{k\to\infty} a_k = a &= \lim_{k\to\infty} b_k \qquad b_k = \sup_{j \geq k} a_j}$$
+the sequences $b_k$ and $c_k$ are strictly decreasing and increasing respectively, and 
+$$c_k \leq a_k \leq b_k \,\,\forall \,k=1,2,\ldots \eqno(1)$$
+Let $\varepsilon > 0$. From equation $(1)$, it follows that there exists an $m \in I \kern -4pt N$ such that
+$$\eqalign{a_k \leq b_k &< a + \varepsilon < +\infty\cr a_k \geq c_k &> a - \varepsilon > -\infty} \qquad \forall\,\, k > m\eqno (2)$$
+The inequalities in $(2)$ imply
+$$a -\varepsilon < a_k < a + \varepsilon \,\, \forall \,\, k > m \quad\Rightarrow\quad |a_k - a| < \varepsilon \quad\Rightarrow\quad \lim_{k\to\infty}a_k = a \eqno \hbox{\vrule height 6pt width 6pt depth 0pt}\hskip3pt$$
+
+\noindent
+{\bf Problem 2}
+
+\noindent
+Prove that for $w, z \in I\kern -4pt R^n$,
+$$|w + z| \leq |w| + |z|$$
+
+\noindent
+It is clear that
+$$\eqalignno{
+(|w| + |z|)^2 &= |w|^2 + 2|w||z| + |z|^2&\cr
+&\geq |w|^2 + 2 |w \cdot z| + |z|^2 &(3)\cr
+&\geq |w + z|^2 & (4)
+}$$
+Line $(3)$ follows from the Cauchy-Schwarz inequality.
+
+\noindent
+The square root of both sides of equation $(4)$ completes the proof.\hfill \vrule height 6pt width 6pt depth 0pt \hskip 3pt{}
+\medskip
+\noindent
+{\bf Problem 3}
+
+\noindent
+For $x \in I \kern -4pt R^n$ and $\delta > 0$ show that $B(x; \delta)$ is open.
+\smallskip
+\noindent
+Let $y \in B(x; \delta)$ and $\varepsilon > 0$.
+
+\noindent
+Choose $z \in B(y; \varepsilon)$. Then if $z \in B(x; \delta) \,\, \forall \,\, z \in B(y; \varepsilon)$, then $B(y; \varepsilon) \subseteq B(x; \delta)$ and $B(x; \delta)$ is open.
+$$\eqalignno{
+|x - z| &= |x - y + y - z| &\cr
+&\leq |x - y| + |y - z| &(5)\cr
+&< \delta + \varepsilon &(6)
+}$$
+Equation $(5)$ follows from the triangle inequality.
+
+\noindent
+Letting $\varepsilon \to 0$ in equation $(6)$ yields $|x - z| < \delta$.
+Therefore $B(y; \varepsilon) \subseteq B(x; \delta)$. \hfill \vrule height 6pt width 6pt depth 0pt \hskip 3pt{}
+\medskip
+\noindent
+{\bf Problem 4.1}
+
+\noindent
+Assume $m \in I \kern -4pt N$. Show that the intersection of $m$ open sets $E_k$ is open.
+\smallskip
+\noindent
+Choose $x \in \bigcap^m_{k=1}E_k$, a point in every $E_k$.
+
+\noindent
+Now construct a ball around $x$ for each $E_k$: $B(x; \delta_k) \subseteq E_k$.
+Each ball with is contained in each of the sets $E_k$ because the sets are all open.
+The set of the balls share the same center $x \in \bigcap^m_{k=1} E_k$.
+The ball with the smallest radius will be contained in all of the other sets.
+Therefore, the smallest ball is contained in the intersection of the sets, implying the intersection of $m$ open sets is open.
+$$B(x; \delta) \subseteq \bigcap^m_{k=1} E_k, \qquad \delta = \min_k{\delta_k} \eqno \hbox{\vrule height 6pt width 6pt depth 0pt} \hskip 3pt$$
+\eject
+\noindent
+{\bf Problem 4.2}
+
+\noindent
+Assume $m \in I \kern -4pt N$. Show that the union of $m$ closed sets $E_k$ is closed.
+\smallskip
+\noindent
+If the union of $m$ closed sets $E_k$ is closed, the complement of the union will be open by definition.
+
+\noindent
+Problem 4.1 proves that the intersection of $m$ open sets is open.
+De Morgan's law states
+$$C \bigcup^m_{k=1} E_k = \bigcap^m_{k=1} C E_k \eqno (7)$$
+$CE_k$ are all open. Therefore $(7)$ and Problem 4.1 imply $C \bigcup E_k$ is open.
+The compliment of this statement will be closed by definition.
+This proves the claim that the union of $m$ closed sets is closed.\hfill \vrule width 6pt height 6pt depth 0pt \hskip 3pt{}
+\medskip
+\noindent
+{\bf Problem 5}
+
+\noindent
+${\cal C}_1$ is the collection of open subsets in $I \kern -4pt R^n$ and ${\cal C}_2$ the collection of closed subsets in $I \kern -4pt R^n$.
+Show that the Borel $\sigma$-algebra $\cal B$ is the smallest $\sigma$-algebra containing ${\cal C}_2$.
+\smallskip
+\noindent
+By definition, the open subset ${\cal C}_1 \supset E \in {\cal B}$.
+Since $\cal B$ is a $\sigma$-algebra, it follows $CE \in {\cal B}$.
+Since $CE \subset {\cal C}_2$ implies that ${\cal C}_2 \subset {\cal B}$.
+This shows that $\cal B$ contains ${\cal C}_2$.
+\smallskip
+\noindent
+Any $\sigma$-algebra $\Sigma \supset {\cal C}_2$ must also contain ${\cal C}_1$.
+If $E \in {\cal C}_1$, then $CE = F \in {\cal C}_2$.
+By definition, if $\Sigma$ contains $CE$, it also contains $E$.
+Since $\cal B$ is the smallest $\sigma$-algebra containing ${\cal C}_1$, it is also the smallest $\sigma$-algebra containing ${\cal C}_2$.\hfill \vrule width 6pt height 6pt depth 0pt \hskip 3pt{}
+\bye
