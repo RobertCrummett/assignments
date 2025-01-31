@@ -1,0 +1,126 @@
+\footline={1/31/2025\hfill Page \folio}
+\noindent
+EENG 531: Homework 1\hfill Robert Nate Crummett
+\smallskip
+\hrule
+\bigskip
+\noindent
+{\bf Problem 1}
+\smallskip
+\noindent
+I am a PhD student in the geophysics department.
+I work for Dr Yaoguo Li, mostly on problems in gravity and magentic exploration.
+Optimization type problems constantly pop up in my research.
+Sometimes when I grid data.
+Other times when I invert data for physical parameters.
+Optimization just seems to be everywhere in my field and work.
+I am most excited to study interior point methods in this course.
+I am also looking forward to wrapping my head around the KKT conditions and really understanding them.
+\medskip
+\noindent
+{\bf Problem 2}
+\smallskip
+\noindent
+Let
+$$f(x) = {1 \over 2} x^T Q x = x_1^2 + 2 x_1 x_2 + x_1 x_3 + 2 x_2^2 + x_2 x_3 + x_3^2 \eqno (1)$$
+with $x \in I \kern -4pt R^3$ and $Q \in I \kern -4pt R^{3 \times 3}$. In $(1)$ the matrix $Q$ is
+$$Q = \left[\matrix{2 & 2 & 1 \cr 2 & 4 & 1 \cr 1 & 1 & 2}\right]$$
+The characteristic polynomial of $(1)$ is $-\lambda^3 + 8\lambda^2 - 14\lambda + 6$, which has roots at $\lambda_1 \approx 5.745$, $\lambda_2 \approx 1.604$, and $\lambda_3 \approx 0.651$. 
+Strict positivity of the eigenvalues implies $Q \succ 0 \Rightarrow Q \succeq 0$.\hfill \vrule width 6pt height 6pt depth 0pt \hskip 3pt{}
+\medskip
+\noindent
+{\bf Problem 3}
+\smallskip
+\noindent
+Suppose $Q \succ 0 \in I \kern -4pt R^{n \times n}$ with eigenvalues $\lambda_1 \geq \lambda_2 \geq \dots \geq \lambda_n > 0$.
+
+\noindent
+For what $\mu$ does $(I - \mu Q)^k \to 0$ as $k \to \infty$?
+\medskip
+\noindent
+The eigenvalues of $(I - \mu Q)^k$ will be equal to $(1 - \mu \lambda_1)^k, (1 - \mu \lambda_2)^k, \dots, (1 - \mu \lambda_n)^k$.
+\smallskip
+\noindent
+For convergence to zero, the magnitude of the largest eigenvalue must be less than one.
+And clearly $\mu$ cannot be less than zero if this is to be satisfied.
+Then for $\mu > 0$ the first eigenvalue to violate the convergence criteria will be $(1 - \mu \lambda_1)^k$. 
+Therefore
+$$|1 - \mu \lambda_1| < 1 \,\, \Rightarrow \,\, 0 < \mu < {2 \over \lambda_1} \eqno \hfill \vrule width 6pt height 6pt depth 0pt \hskip 3pt{}$$
+\noindent
+{\bf Problem 4}
+\smallskip
+\noindent
+{\bf (a)} $f(x) = {1 \over 2} x^T A x$ with $A \in I \kern -4pt R^{n \times n}$ and $x \in I \kern -4pt R^n$.
+$$\eqalign{\nabla f(x) &= {1 \over 2} (A + A^T) x\cr \nabla^2 f(x) &= {1 \over 2} (A + A^T)}$$
+\noindent
+{\bf (b)} $f(x) = {1 \over 2} \| y - Ax \|^2_2$ with $y \in I \kern -4pt R^m$, $A \in I \kern -4pt R^{m \times n}$, and $x \in I \kern -4pt R^n$.
+\smallskip
+\noindent
+The function $f$ is a composition of functions: $f(x) = g(h(x))$ with $g(x) = {1 \over 2}\|x\|^2_2$ and $h(x) = y - Ax$
+
+\noindent
+By the chain rule, $\nabla f(x) = \nabla h(x) \nabla g(h(x))$, with $\nabla$ applied with respect to the inputs,
+$$\quad\quad \nabla h(x) = -A^T \quad {\rm and} \quad \nabla g(h(x)) = y - Ax \quad \Rightarrow \quad \eqalign{\nabla f(x) &= -A^T (y - Ax) = A^T A x - A^T y\cr \nabla^2 f(x) &= A^T A}$$
+\eject
+\noindent
+{\bf (c)} $f(x) = {1 \over 2} \| X - xx^T \|^2_F$ with $X = X^T \in I \kern -4pt R^{n \times n}$ and $x \in I \kern -4pt R^n$.
+\smallskip
+\noindent
+Applying the chain rule again
+$$\eqalignno{h(x) = X - xx^T \quad &\Rightarrow \quad \nabla h(x) = -2x^T&(2)\cr g(z) = {1 \over 2}\|z\|^2_F \quad &\Rightarrow \quad \nabla g(z) = z = X - xx^T &(3)\cr}$$
+\noindent
+$(2)$ follows from application of the chain rule.
+
+\noindent
+$(3)$ is an identity given by The Matrix Cookbook.
+\smallskip
+\noindent
+Substituting $(2)$ and $(3)$,
+$$\eqalignno{\nabla f(x) &= \nabla h(x) \nabla g(h(x)) = -2 x^T (X - x x^T) &(4)\cr\noalign{\vskip 2mm} \Rightarrow \,\, \nabla^2 f(x) &= -2 (X - xx^T)^T - 2(x^T)^T (-2 x^T)&(5)\cr &= -2 (X - xx^T) + 4 x x^T&(6)\cr &=-2X + 6xx^T&\cr}$$
+\noindent
+$(5)$ follows from applying the chain rule to $(4)$, and substituting $(2)$ into the result.
+
+\noindent
+$(6)$ follows from noting that both $X$ and $xx^T$ are symmetric $\Rightarrow (X - xx^T)$ is symmetric as well.
+\medskip
+\noindent
+{\bf (d)} $f(x) = x \odot y$ with $x, y\in I \kern -4pt R^n$ and $\odot$ indicating the element-wise product.
+\medskip
+\noindent
+$f: I \kern -4pt R^n \to I \kern -4pt R^n$, therefore simply take an element wise derivative to find
+\vskip -2mm
+$$\eqalign{\nabla f(x) &= y \cr \nabla^2 f(x) &= 0}$$
+\medskip
+\noindent
+{\bf Problem 5}
+\smallskip
+\noindent
+A function $f(x)$ is $L$-smooth if
+$$\|\nabla f(x) - \nabla f(y)\|_2 \leq L\|x - y\|_2$$
+\medskip
+\noindent
+{\bf (a)} $f(x) = a^T x$ for fixed $a \in I \kern-4pt R^n$
+$$\nabla f(x) = a \,\, \Rightarrow \,\, \|\nabla f(x) - \nabla f(y) \|_2 = 0 \leq L \|x - y\|_2 \,\, \Rightarrow \,\, L = 0$$
+Therefore $L = 0$ is the greatest lower bound.
+\smallskip
+\noindent
+{\bf (b)} $f(x) = {1 \over 2} x^T A x$, where $A = A^T \in I \kern-4pt R^{n \times n}$.
+\smallskip
+\noindent
+$\nabla f(x) = Ax$ is a result which follows from Problem 4A. Therefore,
+$$\eqalignno{\|\nabla f(x) - \nabla f(y) \|_2 = &\|Ax - Ay\|_2 \leq L \|x-y\|_2&\cr \noalign{\vskip 2mm} \Rightarrow \quad &{\|A(x-y)\|_2 \over \|x-y\|_2} \leq L &(7)\cr}$$
+$(7)$ is the statement of the 2-matrix norm.
+This norm can be expressed in terms of $A$'s maximum singular value, $\sigma_{\rm max}$
+$${\|A(x-y)\|_2 \over \|x-y\|_2} = \|A\|_{2,2} = \sigma_{\rm max} \leq L$$
+Therefore, the greatest lower bound on $L$ is $\sigma_{\rm max}$.
+\vfill
+\noindent
+{\bf References}
+\smallskip
+\noindent
+Petersen, K. B. \& Pedersen, M. S. (2008). {\it The Matrix Cookbook}. Technical University of Denmark.
+
+\noindent
+https://www2.imm.dtu.dk/pubdb/pubs/3274-full.html
+\eject
+\end
