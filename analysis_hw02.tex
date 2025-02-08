@@ -1,0 +1,143 @@
+\footline={2/7/2025\hfill Page \folio}
+\def\reals{I\kern-4pt R}
+\def\nats{I\kern-4pt N}
+\let\oldexists\exists \def\exists{\oldexists \;}
+\let\oldforall\forall \def\forall{\oldforall \,}
+\def\qed{\vrule height 6pt width 6pt depth 0pt}
+\parindent 0pt
+\parskip 2mm
+
+
+MATH~503: Homework~2\hfill Robert~Nate~Crummet\kern-1pt t
+\smallskip
+\hrule
+
+
+\medskip{\bf Problem 1}
+
+
+Defining
+
+
+\vskip-1.65cm
+$$\eqalignno{|E|_e = \inf S, \quad &S = \Bigl\{ \sum_{k=1}^\infty V(I_k^e) : \{I_k^e\}_{k=1}^\infty {\rm ~a~sequence~in~}\reals^n{\rm ~s.t.~}E\subset\bigcup_{k=1}^\infty I_k^e\Bigr\}&(1)\cr |E|_i = \sup F, \quad &F = \Bigl\{ \sum_{k=1}^\infty V(I_k^i) : \{I_k^i\}_{k=1}^\infty {\rm ~a~sequence~in~}\reals^n{\rm ~s.t.~}E\supset\bigcup_{k=1}^\infty I_k^i\Bigr\}&(2)\cr}$$
+
+
+\vskip-2mm
+{\bf i)} By $(1)$ and $(2)$,
+$$\bigcup^\infty_{k=1} I^i_k \subset E \subset \bigcup^\infty_{k=1} I^e_k \quad \Rightarrow \quad \bigcup^\infty_{k=1} I^i_k \subset \bigcup^\infty_{k=1} I^e_k \quad \Rightarrow \quad \sum_{k=1}^\infty V(I^i_k) \leq \sum_{k=1}^\infty V(I^e_k)\eqno\qed\hskip3pt{}$$
+%\hskip4mm where the last step follows from the monoticity of $|\cdot|_e$
+
+{\bf ii)} Assume $|E|_e < \infty$. Show that $|E|$ exists if and only if $|E|_e = |E|_i$
+
+
+\smallskip\hskip5mm($\Rightarrow$)\hskip2mm
+Let $|E|$ exists.
+Then by definition $|E| = |E|_e$ and $|E| = |E|_i$.
+Therefore $|E|_e = |E|_i$.
+
+
+\smallskip\hskip5mm($\Leftarrow$)\hskip2mm
+Let $|E|_e = |E|_i$.
+I cannot figure out how to prove this!%\hfill\qed\hskip3pt{}
+
+
+\bigskip{\bf Problem 2}
+
+
+Assume $E_k \in {\cal M}_n$, $k \in \nats$ and $E_k$ are disjoint.
+Clearly, subadditivity holds:
+$$\bigl|\,\bigcup_k E_k\,\bigr| \leq \sum_k |E_k|\eqno (3)$$
+The converse must be shown.
+
+
+Let $\varepsilon > 0$
+
+
+Choose closed $F_k \subset E_k$ s.t.\ $|E_k - F_k| < \varepsilon 2^{-k}$, and let $|E_k| \leq |F_k| + \varepsilon 2^{-k}$
+
+
+Since $E_k$ are disjoint, so are $F_k \Rightarrow | \bigcup_k F_k | = \sum_k |F_k|$\hfill (4)
+
+
+$\bigcup_k F_k \subset \bigcup_k E_k$ and (4) imply that $\sum_k |F_k| \leq \sum_k |E_k|$\hfill (5)
+$$|\bigcup_k E_k| \geq \sum_k |F_k| \geq \sum_k (|E_k| - \varepsilon 2^{-k}) = \sum_k |E_k| - \varepsilon$$
+where the first inequality follows from (5).
+
+
+Letting $\varepsilon \to 0$,
+$$|\bigcup_k E_k| \geq \sum_k |E_k| \eqno (6)$$
+Together, (3) and (6) prove the statement.\hfill\qed\hskip3pt{}
+
+
+\medskip{\bf Problem 3}
+
+
+{\bf i)} Let $f:E\to\reals_e$ be a measurable function on $E\subset\reals^n$. Let $E_0$ be a measurable subset of $E$, and $f_0$ the restriction of $f$ to $E_0$. Show that $f_0:E_0\to\reals_e$ is a measurable function on $E_0$.
+$$E_0 \subset E \Rightarrow \{x\in E_0:f(x)>a\} \subset \{x\in E: f(x) > a\}$$
+And by definition, $\{x\in E_0:f(x)>a\} = \{x\in E_0:f_0(x)>a\}$. Therefore $f_0$ is measurable on $E_0$.\hfill\qed\hskip3pt{}
+
+
+{\bf ii)} Let $f_1$ and $f_2$ be measurable functions:
+$$\eqalignno{\{x\in E_1&:f_1 > a\}&(7a)\cr\{x\in E_2&:f_2 > a\}&(7b)\cr}$$
+
+
+It is given that $f_1=f|_{E_1}$ and $f_2=f|_{E_2}$. Therefore, in $E_1\cap E_2$ we have $f_1=f_2=f$
+
+
+It is also given that $E=E_1\cup E_2$. Rewrite $E=E_1\cup E_2=E_1+E_2-E_1\cap E_2$
+
+
+$$\eqalign{\{x\in E:f>a\} &= \{x\in E_1+E_2-E_2\cap E_1:f>a\}\cr&=\{x\in E_1:f>a\}+\{x\in E_2:f>a\}-\{x\in E_1\cap E_2:f>a\}\cr&=\underbrace{\{x\in E_1:f_1>a\}}_{7a}+\underbrace{\{x\in E_2:f_2>a\}}_{7b}-\underbrace{\{x\in E_1\cap E_2:f_1>a\}}_{3i}}$$
+$7a$ and $7b$ are both measurable by definition.
+The final term, $3i$, is measurable on account of the previous result, if we take note that $E_1 \cap E_2 \subset E_1$.
+Because $\{x\in E:f>a\}$ can be expressed as three disjoint measurable sets, $\{x\in E:f>a\}$ is also measurable.\hfill\qed\hskip3pt{}
+
+
+\medskip{\bf Problem 4}
+
+
+$E_1$ and $E_2$ are composed from the intersection of two measurable sets, and therefore are themselves measurable.
+This implies that $E_1 \cup E_2$ is measurable.
+Because $E_0 = E - (E_1\cup E_2) = C(E_1\cup E_2)$, $E_0$ must also be measurable.
+
+
+Let $f_0=f|_{E_0}$ and $g_0=g|_{E_0}$.
+By problem $3i$, the functions $f_0$ and $g_0$ are both measurable on $E_0$.
+
+
+The sum of measurable functions is itself measurable.
+Additionally, the sum $f_0 + g_0$ is well defined everywhere on $E_0$.
+Therefore $f_0 + g_0: E_0\to\reals_e$ is measurable on $E_0$.
+Equivalently, $f + g: E_0\to\reals_e$ is measurable on $E_0$.\hfill\qed\hskip3pt{}
+
+
+\medskip{\bf Problem 5}
+
+
+The set $E$ is split into disjoint parts $E-E_0$ and $E_0$.
+Problem 4 proved that $h(x)=f(x)+g(x)$ is measurable on $E_0$.
+It only remains to be shown that $h(x)$ is measurable on $E-E_0$.
+
+
+Claim: the constant function $h(x)=c$ for $c\in\reals^n$ is measurable on $E-E_0$.
+This follows because for $a\leq c$, $\{x\in E-E_0:h(x)>a\}$ is empty which is measurable by definition.
+Alternatively, for all $a>c$, $\{x\in E-E_0:h(x)>a\} = E-E_0$ which is measurable.
+This proves the claim.
+
+
+Since $h(x)$ is measurable in $E_0$ and $E-E_0$, it is measurable in $E$.\hfill\qed\hskip3pt{}
+
+
+\medskip{\bf Problem 6}
+
+
+By definition, $\lim_{k\to\infty}f_k$ exists everywhere in $E_0$.
+
+
+Wherever $\lim_{k\to\infty}f_k$ exists, it will be equal to $\limsup_{k\to\infty}f_k$
+
+
+$\limsup_{k\to\infty}f_k$ is measurable because $\{x\in E_0:\sup_kf_k>a\}=\bigcup_k\{x\in E_0:f_k>a\}$, a countable union of measurable sets.
+Since the $limsup_{k\to\infty}f_k$ is measurable on $E_0$, and the limit exists on $E_0$, the $\lim_{k\to\infty}f_k$ is measurable on $E_0$.
+\bye
