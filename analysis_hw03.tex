@@ -1,0 +1,59 @@
+\footline={2/19/2025\hfill Page \folio}
+\def\reals{I\kern-4pt R}
+\def\nats{I\kern-4pt N}
+\let\oldexists\exists \def\exists{\oldexists \;}
+\let\oldforall\forall \def\forall{\oldforall \,}
+\def\qed{\vrule height 6pt width 6pt depth 0pt}
+\parindent 0pt
+\parskip 2mm
+
+
+MATH~501: Homework~3\hfill Robert~Nate~Crummett
+\smallskip
+\hrule
+
+
+\medskip{\bf Problem 1}
+
+
+By Fatou's Lemma, $\liminf_{k\to\infty}\int_Ef_k\geq\int_E\liminf_{k\to\infty}f_k$.
+
+But since the limit of $f_k$ exists, $\liminf_{k\to\infty}\int_Ef_k\geq\int_E\lim_{k\to\infty}f_k=\int_Ef$.
+
+
+\medskip{\bf Problem 2}
+
+
+Let $E_1$ and $E_2$ be measurable sets contained in $E$ a measurable set
+$$E_1=\{x\in E:f(x)>0\}\qquad E_2=\{x\in E:f(x)<x\}.$$
+Then by the property given,
+$$\int_{E_1}f=0\qquad\int_{E_2}f=0.$$
+On $E_1$ and $E_2$, $f$ is strictly positive or negative respectively.
+This implies that $f=0$ almost everywhere on $E_1$ and $E_2$.
+Now, $E = E_1 + E_2 + Z$, where $Z=\{x\in E:f(x)=0\}$.
+So $f$ is 0 almost everywhere on $E$.
+Therefore, the property that $\int_Af=0$ for all measurable subsets $A$ of $E$ implies that $f$ must be zero almost everywhere on all of $E$.
+
+
+\medskip{\bf Problem 3}
+
+
+Observe $0\leq|x^kf(x)|\leq|f(x)|$ for all $k\in\nats$.
+Since $f(x)\in L(E)$, this implies $|f(x)|\in L(E)$.
+But this last observation implies that $|x^kf(x)|\in L(E)$, since $|x^kf(x)|$ is bounded above by a Lebesgue measurable function.
+And since $|x^kf(x)|\in L(E)$, then $x^kf(x)\in L(E)$ as well.
+But this is the first thing that I was required to show.
+
+We have just identified a Lebesgue measurable function $f(x)$ that bounds $x^kf(x)$ for all $k$.
+I can invoke the general Lebesgue Dominated Convergence Theorem (LDCT) if $x^kf(x)$ monotonically decreases with $k$ to some limit point.
+Clearly this limit point is $0$.
+So since this is the case, I invoke the LDCT
+$$\lim_{k\to\infty}\int_Ef_k(x)\buildrel\rm LDCT\over =\int_E\lim_{k\to\infty}f_k(x)=\int_E0=0$$
+Which is the second requested result.
+
+
+\medskip{\bf Problem 4}
+
+
+
+\bye
