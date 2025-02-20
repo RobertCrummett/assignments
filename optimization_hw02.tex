@@ -1,0 +1,77 @@
+\footline={2/10/2025\hfill Page \folio}
+\def\reals{I\kern-4pt R}
+\def\nats{I\kern-4pt N}
+\let\oldexists\exists \def\exists{\oldexists \;}
+\let\oldforall\forall \def\forall{\oldforall \,}
+\def\qed{\vrule height 6pt width 6pt depth 0pt}
+\parindent 0pt
+\parskip 2mm
+
+
+EENG~521: Homework~2\hfill Robert~Nate~Crummet\kern-1pt t
+\smallskip
+\hrule
+
+
+\medskip{\bf Problem 1}
+
+
+{\bf a)}\hskip2mm
+Let $f(x)=100(x_2-x_1^2)^2+(1-x_1)^2$.
+The gradient $\nabla f(x)\in\reals^2$ and the Hessian $\nabla^2f(x)\in\reals^{2\times 2}$ are
+$$\eqalignno{\nabla f(x)&=\pmatrix{-400x_1(x_2-x_1^2)-2(1-x_1)\cr200(x_2-x_1^2)}&\cr\nabla^2f(x)&=\pmatrix{-400x_2+1200x_1^2+2&-400x_1\cr-400x_1&200}&\qed\hskip3pt{}}$$
+
+
+To prove $x^*=(1\;1)$ is the only stationary point, it is sufficient to show that it is the unique solution to the linear system $\nabla f(x)=0$.
+If a solution exists, it is unique, because there are two equations in two unknowns
+$$\eqalignno{400x_1^3-400x_1x_2+2x_1-2&=0&(1)\cr-200x_1^2+200x_2&=0&(2)}$$
+Equation (2) implies that $x_2=x_1^2$.
+Substitution of this equality into (1) yields $x_1=1$.
+Plugging this value back into (2), I find that $x_2=1$.
+This yields the desired result.\hfill\qed\hskip3pt{}
+
+
+To show $x^*$ is the unique local minimizer, the Hessian must be positive definite.
+$$\nabla^2f(x^*)=\pmatrix{\hphantom{-}802&-400\cr-400&\hphantom{-}200}\eqno(3)$$
+The eigenvalues of this matrix are $\lambda_1\approx1001.6$ and $\lambda_2\approx0.3994$.
+Positive eigenvalues mean $\nabla^2f(x)\succ0$\hfill\qed\hskip3pt{}
+
+
+{\bf P.S.\ }This matrix is quite poorly conditioned.
+This is evident both from the large distance between the eigenvalues and the similarity in the rows of (3).
+
+
+{\bf b)}\hskip2mm
+Let $f(x)=8x_1+12x_2+x_1^2-2x_2^2$.
+Show that there is one stationary point, and that it is a saddle point.
+
+
+As before, let $\nabla f(x)=0$.
+$$\nabla f(x)=\pmatrix{8+2x_1\cr12-4x_2}=0$$
+Clearly, there is only one stationary point: $x^*=(-4\;3)$.
+This is the first requested result.\hfill\qed\hskip3pt{}
+
+
+To show $x^*$ is a saddle point, the eigenvalues of the Hessian $\nabla^2f(x^*)$ must be examined.
+$$\nabla^2f(x)=\pmatrix{2&\hphantom{-}0\cr0&-4}\eqno(4)$$
+The Hessian (4) has no dependence on $x$.
+Therefore $\nabla^2f(x)=\nabla^2f(x^*)$.
+The Hessian (4) is also already diagonal.
+By inspection, the eigenvalues are $\lambda_1=2$ and $\lambda_2=-4$.
+Because the eigenvalues have opposite signs, the stationary point $x^*$ must lie on a saddle.
+This is the second requested result.\hfill\qed\hskip3pt{}
+
+
+{\bf c)}\hskip2mm
+Let $f(x)=e^{x_1+x_2}+(x_1+x_2)^2$. The gradient $\nabla f(x)$ is
+$$\nabla f(x)=\pmatrix{e^{x_1+x_2}+2(x_1+x_2)\cr e^{x_1+x_2}+2(x_1+x_2)}$$
+Substituting $u=x_1+x_2$, all stationary points satisfy $e^u=-2u$.
+
+\vskip-2mm
+This last expression can be reorganized such that it takes the form
+$$-ue^{-u}={1\over2}\eqno(5)$$
+Equation (5) can be solved via application of the Lambert $W$ function, $W_0$
+$$x_1+x_2=-W_0\Bigl({1\over2}\Bigr)=-0.3517\eqno(6)$$
+Equation (6) describes a line of stationary points.
+
+\bye
