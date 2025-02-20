@@ -1,0 +1,232 @@
+% Final report for kernel-based approximation methods
+\font\reportfont=cmr12
+\font\reportifont=cmti12%0 at 12pt
+\font\sectionfont=cmti12 at 14pt
+\font\titlefont=cmb10 at 14pt
+
+\font\mathrmfont=cmr12
+\textfont0=\mathrmfont
+\font\mathrmfont=cmr8
+\scriptfont0=\mathrmfont
+\font\mathrmfont=cmr6
+\scriptscriptfont0=\mathrmfont
+
+\font\mathifont=cmmi12
+\textfont1=\mathifont
+\font\mathifont=cmmi8
+\scriptfont1=\mathifont
+\font\mathifont=cmmi6
+\scriptscriptfont1=\mathifont
+
+\font\mathscfont=cmsy10 at 12pt
+\textfont2=\mathscfont
+\font\mathscfont=cmsy8
+\scriptfont2=\mathscfont
+\font\mathscfont=cmsy6
+\scriptscriptfont2=\mathscfont
+
+\font\mathexfont=cmex10 at 12pt
+\textfont3=\mathexfont
+\font\mathexfont=cmex8
+\scriptfont3=\mathexfont
+\font\mathexfont=cmex7 at 6pt
+\scriptscriptfont3=\mathexfont
+
+\def\euclideanr{{\rm I \kern -2pt R}}
+\def\sectiontitle#1{\noindent {\sectionfont #1} \par \smallskip}
+
+\reportfont
+\baselineskip 14pt
+\centerline{\titlefont Interpolation of Radiometric Data}
+\vskip 1mm
+\hrule height 0.7pt
+\vskip 1mm
+\noindent
+Kernel-Based~Approximation~Methods \hfill R~Nate~Crummet\kern -1pt t, December~2024
+
+\vskip 5mm
+\sectiontitle{Background}
+All familiar materials, including rocks, emit electromagnetic radiation.
+Rocks do not usually light up in the visible frequency bands, but certain minerals have distinct ``colors'' in non-visible frequencies.
+This paper is concerned with very special non-visible frequency bands, the bands responsible for {\reportifont gamma-rays\/}.
+
+\medskip
+Three chemical elements in particular emit gamma rays abundantly enough to measure from an airplane --- potassium, thorium, and uranium.
+In {\reportifont light\/} of this, remote sensing specialists decided long ago to spatially map abundances of these elements by taking measurements of the radiation.
+Measurements of high energy photon abundance are deconvolved into concentrations of radioactive elements in the near surface.
+By ``near surface'' what is meant is upper 50 centimeters of soil.
+Spatial distributions of potassium, throium, and uranium in the near surface are useful in natural resource exploration.
+
+\medskip
+Once spatial distributions of radioelements are recovered, one may desire to regrid them.
+Regression on noisy concentration data is the motivation for this minipaper.
+The first obstacle to overcome towards this goal is presented by the statistical nature of compositional data.
+
+\bigskip
+\sectiontitle{The First Obstacle: Constraints}
+Potassium, thorium, and uranium concentrations are reported in percentages and parts per million.
+Compositional data is difficult to work with for two reasons:
+\medskip
+\noindent \quad (1) \quad All parts of the composition must be strictly positive
+\smallskip
+\noindent \quad (2) \quad The sum of the parts of each measurement must total to 100\%
+\medskip
+\noindent If compositional data is to be treated in a statistically rigorous manner, both of these constraints must be honored at each measurement location.
+This reality immediately suggests serious complications.
+
+\medskip
+Serious obstacles are presented by the need to obey the compositional data constraints.
+Constraint (1) is often violated by noise.
+Noise leads to non-physical, {\reportifont negative concentrations\/} in the radioelement data.
+It is not immediately obvious how to best deal with this non-realistic data.
+We will return to the solution in the next section.
+What is known is that interpolation should never suggest a negative value.
+
+\medskip
+Constraint (2) is a numerical obstacle.
+In order to garuntee that all recovered concentrations sum to unity, a simultaneous inversion is required.
+Four channels (potassium, thorium, uranium, and the non-responsive part of the rock) all need to be interpolated together.
+This would not be cheap spatially or temporally.
+Fortunately, transforms provide an easy avenue to satisfy both constraints and avoid complexity.
+
+\bigskip
+\sectiontitle{Addressing the Constraints --- Trick or Transform?}
+Compositional data $x$ belongs to the simplex ${\cal S}^D$
+$${\cal S}^D = \biggl\{\, x = [x_1, x_2, \ldots, x_D]; \, x_i > 0, \, {\textstyle \sum\limits^D_{i=1}} x_i = \kappa\,\biggr\}$$
+with unity for the measurements defined as $\kappa$.
+The simplex encodes the constraints on compositional data.
+In order to deal with the restrictive constraints, staticians created the {\reportifont isometric logratio transform\/} ${\rm ilr} : {\cal S}^D \mapsto \euclideanr^{D-1}$ which is defined as
+$$\eqalign{
+y &= {\rm ilr}(x) = {\rm clr}(x) \cdot \Psi^T \cr
+x &= {\rm ilr}^{-1}(y) = {\rm clr}^{-1}(y \cdot \Psi) \cr
+}$$
+where $\Psi$ is the contrast matrix and the {\reportifont centered logratio transform\/} $\rm clr : {\cal S}^D \mapsto \euclideanr^D$ is
+$$\eqalign{
+\xi &= {\rm clr}(x) = \biggl[ \, \log{x_1 \over g(x)}, \log{x_2 \over g(x)}, \ldots, \log{x_D \over g(x)} \, \biggr] \cr
+x &= {\rm clr}^{-1}(\xi) = {\cal C} \biggl( \bigl[ \, \exp(\xi_1), \exp(\xi_2), \ldots, \exp(\xi_D) \, \bigr] \biggr) \cr 
+}$$
+Here, $g(x)$ is the geometric mean and $\cal C$ is the closure operation.
+The $\rm ilr$ maps from the simplex of dimension $D$ into an orthonormal basis in a standard Euclidean vector space of dimension $D -1$, chosen by the contrast matrix $\Psi$.
+
+\medskip
+Previously, constraint (2) presented a computational hurdle to performing regression on radioelement data.
+The $\rm ilr$ transform solves this problem by making the channels independant of eachother.
+The inverse $\rm ilr$ will automatically satisfy constraint (2) in a consistent manner.
+
+\medskip
+Constraint (1) will be satisfied aswell, because the inverse $\rm ilr$ transform will never map to negative values.
+How then do we deal with negative values present in the observed data?
+Negative data inconsistent with the definition of data in the simplex ${\cal S}^D$.
+In order to garuntee the data lives in the simplex, we can throw away all of the data below an arbitrarily small constant $\varepsilon > 0$. 
+This is usually less than 1\% of the data.
+
+\bigskip
+\sectiontitle{A Digression on the Contrast Matrix}
+The contrast matrix function as a projection that selects a suitable orthonormal basis of size $D-1$ from the infinite possibilities in $\euclideanr^D$.
+The projection can be defined however we choosen, so long as some unintuitive rules are obeyed.
+In the compositional data anlysis literature it appears fashionable to choose the basis by principal component analysis.
+But for radiometrics, which only has four dimensions, this is overkill.
+
+\medskip
+A simple but effective method to select a basis is to use domain knowledge.
+A contrast matrix can be defined using a {\reportifont sequential binary partition\/} imbued with domain knowledge.
+Avoiding the numeric details, the sequential binary partition manually defined selects the three groups
+\medskip
+\noindent \quad (1) \quad the non-responsive rock vs. the radioactive elements
+\smallskip
+\noindent \quad (2) \quad potassium vs. the ``large'' elements
+\smallskip
+\noindent \quad (3) \quad uranium vs. thorium
+\medskip
+\noindent These three groups form the orthonormal basis that the $\rm ilr$ transform maps into.
+
+\bigskip
+\sectiontitle{Relaxed Interpolation}
+Kernel methods will be used to regrid the data.
+Because of noise in the observations, I augment the standard interpolation with a regularization term
+$$c = K^{-1} x \quad \longrightarrow \quad c = (K^T \! K + \beta I )^{-1} K^T x$$
+where $x$, $c$, and $K$ follow the notation from class, $\beta$ is the regularization parameter, and $I$ is the identity matrix.
+This approach is also referred to as {\reportifont relaxed interpolation\/}.
+Schaback and Wendland (2006) argue this is a reliable method to address non-uniformity and noise in data simultaneously.
+
+\medskip
+The ``best'' solution of the relaxed interpolation $s_\beta = k(x)^T c$ satisfies the bound
+$$\| f - s_\beta \|_{L_\infty(\Omega)} \leq C \biggl( h^{\tau - d / 2}_{X, \Omega} + \sqrt{\beta}\,\biggr) \|f\|_{\cal K}$$
+This error bound says that if $\beta$ is chosen such that it is proportional to $h^{2\tau - d}$, then the approximation retains an optimal order of convergence.
+This is intuitive based on error bounds analyzed in class for interpolation problems.
+What is more, Schaback and Wendland (2006) add that the smallest eigenvalue now acts as it would in the case of quasi-uniformly spaced data.
+Quasi-uniformly spaced data is defined as data where the ratio of fill distance to minimum spacing is approximately one.
+
+\medskip
+The interpolation problem has been complicated by adding a regularization parameter $\beta$.
+This means that we may have to perform an optimization over two parameters to achieve the best result --- the regularization parameter $\beta$ and the scaling parameter of the kernel itself.
+
+\bigskip
+\sectiontitle{Tough Choices: Choosing a Kernel}
+There are not many clues regarding how to choose a good kernel for radiometric data.
+No partial differential equations govern the distribution of radioelements in the near surface.
+But a choice is necessary, and can be motivated by demanding sparseness in the linear systems.
+
+\medskip
+Radioelement distribution maps can span continents.
+To fit the interpolation problem in a computer for large problems, the linear systems must be sparse.
+Therefore, we require that the kernels be compactly supported.
+
+\medskip
+The ``mising'' Wendland kernel $K_{2, {1 \over 2}}$ was selected becuase it is compactly supported over $r \in [0, 1]$.
+The Wendland kernel $K_{2, {1 \over 2}} : \euclideanr^2 \times \euclideanr^2 \mapsto \euclideanr$ is defined as
+$$K_{2, {1 \over 2}}(r) = (1 + 2 r^2) \sqrt{1 - r^2} + 3 r^2 \log\Biggl( {r \over 1 + \sqrt{1 - r^2}}\Biggr) $$
+The minimum smoothness $C^1$ was selected because radioelement distributions in the near surface are quite ``rugged''.
+
+\medskip
+The scaling of the Wendland kernel controls the radius of support.
+For this project, the kernel was scaled such that the radius of support was slightly larger than the average observation spacing.
+This choice was not theoretically motivated yet.
+This scaling parameter of the kernel was not optimized over because we still have to optimize over the regularization parameter $\beta$.
+Rather than optimizing simultaneously over two parameters, fixing one keeps the problem simple and produces reasonable results.
+
+\bigskip
+\sectiontitle{The Second Obstacle: Extrapolation}
+Regularization is desireable for regression because it remedies noise and coallessing of datapoints.
+Both aspects are positive.
+However, geologic concerns immediately arise.
+
+\medskip
+Extrapolation occurs whenever a prediction is made outside the radius of support of the kernels.
+The model objective function governs the value of the function entirely when extrapolation occurs.
+Regressions with the smallest model objective ($\beta I$) will predict the ``average'' value whenever extrapolation occurs.
+This matches our intuition for regions very far from any observed data.
+But in a tight infill scenario, predicting the global average often leads to implausible jumps in compositional values.
+A smooth extrapolation is desireable.
+
+\medskip
+Rather than simply predicting the global average, a smooth extrapolation is desirable.
+To achieve smooth extrapolation, the model objective function is modified
+$$c = (K^T \! K + \beta I )^{-1} K^T x \quad \longrightarrow \quad c = (K^T \! K + \beta M )^{-1} K^T x, \qquad M = (I + \alpha \nabla^2)^T \! (I + \alpha \nabla^2) $$
+where $M$ is the modified model objective function and $\nabla^2$ is the discretized Laplacian operator.
+The balance $\alpha$ was empiracly chosen.
+While garuntees on optimal convergence are lost, the extrapolation will now be smooth.
+The linear systems remain sparse.
+The regularization parameter $\beta$ can be chosen by generalized cross validation or any other metric of goodness.
+
+\bigskip
+\sectiontitle{Review of Results}
+Regridding radioelement compositions is possible in a physically consistent manner.
+Both positivity and total constraints are satisfied by motiving the interpolation problem into the $\rm ilr$ transform domain.
+Because the $\rm ilr$ transform is computationally negligable, we have managed to achieve a type of constained inversion with no computational overhead.
+Despite these advantages, there remain uncomfortable questions.
+
+\medskip
+{\reportifont Why should Wendland kernels be used, as opposed to another kernel?\/ }
+While filling Sobelov spaces is desirable for interpolating magnetic and gravity fields, one cannot say the same for geochemical data.
+It is physically more realistic to expect abrupt, non-differentiable changes in soil composition due to faults.
+However, we are not interpolating real radioelement soil samples, but soil compositions computed from a deconvolution.
+It may be reasonable to expect that however the deconvolution problem was solved, the grids being interpolated possess some smoothness.
+
+\medskip
+{\reportifont Why should the kernel scaling parameter be fixed?\/}
+Most certainly it shouldn't.
+This has been done to simplify the model.
+I am still uncertain regarding the best way to optimize relaxed interpolation with multiple free parameters.
+
+\bye
