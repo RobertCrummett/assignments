@@ -1,4 +1,4 @@
-\footline={2/19/2025\hfill Page \folio}
+\footline={2/20/2025\hfill Page \folio}
 \def\reals{I\kern-4pt R}
 \def\nats{I\kern-4pt N}
 \let\oldexists\exists \def\exists{\oldexists \;}
@@ -16,9 +16,22 @@ MATH~501: Homework~3\hfill Robert~Nate~Crummett
 \medskip{\bf Problem 1}
 
 
-By Fatou's Lemma, $\liminf_{k\to\infty}\int_Ef_k\geq\int_E\liminf_{k\to\infty}f_k$.
+If $0\leq f_k\leq f$ for all $k$, then it follows that $\int_Ef_k\leq\int_Ef$.
 
-But since the limit of $f_k$ exists, $\liminf_{k\to\infty}\int_Ef_k\geq\int_E\lim_{k\to\infty}f_k=\int_Ef$.
+Since the limit of $f_k$ exists, the limit infimum of the sequence also exists and is equal to the limit.
+
+This observation motivates
+$$\lim_{k\to\infty}\int_Ef_k\leq\int_Ef=\int_E\lim_{k\to\infty}f_k=\int_E\liminf_{k\to\infty}f_k$$
+
+Since $f_k$ is a sequence of nonnegative measurable functions on $E$, Fatou's Lemma holds:
+$$\int_E\liminf_{k\to\infty}f_k\leq\liminf_{k\to\infty}\int_Ef_k$$
+the last two statements imply that
+$$\lim_{k\to\infty}\int_Ef_k\leq\liminf_{k\to\infty}\int_Ef_k$$
+But clearly the limit infimum of a sequence is always less than or equal to the sequence.
+Therefore
+$$\lim_{k\to\infty}\int_Ef_k=\liminf_{k\to\infty}\int_Ef_k$$
+Since $\int_Ef$ is squeezed inbetween these last two terms, it also must be equal to the last two terms.
+This is the requested result.\hfill\qed\kern3pt{}
 
 
 \medskip{\bf Problem 2}
@@ -32,7 +45,7 @@ On $E_1$ and $E_2$, $f$ is strictly positive or negative respectively.
 This implies that $f=0$ almost everywhere on $E_1$ and $E_2$.
 Now, $E = E_1 + E_2 + Z$, where $Z=\{x\in E:f(x)=0\}$.
 So $f$ is 0 almost everywhere on $E$.
-Therefore, the property that $\int_Af=0$ for all measurable subsets $A$ of $E$ implies that $f$ must be zero almost everywhere on all of $E$.
+Therefore, the property that $\int_Af=0$ for all measurable subsets $A$ of $E$ implies that $f$ must be zero almost everywhere on all of $E$.\hfill\qed\kern3pt{}
 
 
 \medskip{\bf Problem 3}
@@ -49,10 +62,10 @@ I can invoke the general Lebesgue Dominated Convergence Theorem (LDCT) if $x^kf(
 Clearly this limit point is $0$.
 So since this is the case, I invoke the LDCT
 $$\lim_{k\to\infty}\int_Ef_k(x)\buildrel\rm LDCT\over =\int_E\lim_{k\to\infty}f_k(x)=\int_E0=0$$
-Which is the second requested result.
+Which is the second requested result.\hfill\qed\kern3pt{}
 
-
-\medskip{\bf Problem 4}
+\eject
+{\bf Problem 4}
 
 
 
