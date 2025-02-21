@@ -1,4 +1,4 @@
-\footline={2/10/2025\hfill Page \folio}
+\footline={2/20/2025\hfill Page \folio}
 \def\reals{I\kern-4pt R}
 \def\nats{I\kern-4pt N}
 \let\oldexists\exists \def\exists{\oldexists \;}
@@ -63,15 +63,31 @@ This is the second requested result.\hfill\qed\hskip3pt{}
 
 
 {\bf c)}\hskip2mm
-Let $f(x)=e^{x_1+x_2}+(x_1+x_2)^2$. The gradient $\nabla f(x)$ is
-$$\nabla f(x)=\pmatrix{e^{x_1+x_2}+2(x_1+x_2)\cr e^{x_1+x_2}+2(x_1+x_2)}$$
-Substituting $u=x_1+x_2$, all stationary points satisfy $e^u=-2u$.
+Let $f(x)=e^{x_1+x_2}+(x_1-x_2)^2$. The gradient $\nabla f(x)$ is
+$$\nabla f(x)=\pmatrix{e^{x_1+x_2}+2(x_1-x_2)\cr e^{x_1+x_2}-2(x_1-x_2)}$$
+Stationary points, where $\nabla f(x)=0$, never occur.
+To see this, let each component of the gradient be equal to zero.
+$$\eqalign{e^{x_1+x_2}+2(x_1-x_2)=0\cr e^{x_1+x_2}-2(x_1-x_2)=0}$$
+If the equations are added together, the polynomial terms cancel and the exponential terms only remain.
+$$(e^{x_1+x_2}+2(x_1-x_2))+(e^{x_1+x_2}-2(x_1-x_2))=2e^{x_1+x_2}=0$$
+But the exponential is positive for all points $x_1$ and $x_2$.
+So the last equality has no solutions.
+Therefore there are no stationary points of this function.
+Therefore there is no global minimizer.\hfill\qed\kern3pt
 
-\vskip-2mm
-This last expression can be reorganized such that it takes the form
-$$-ue^{-u}={1\over2}\eqno(5)$$
-Equation (5) can be solved via application of the Lambert $W$ function, $W_0$
-$$x_1+x_2=-W_0\Bigl({1\over2}\Bigr)=-0.3517\eqno(6)$$
-Equation (6) describes a line of stationary points.
+\eject
+{\bf Problem 2}
 
+
+{\bf a)}\hskip2mm
+To show that $f$ is convex, it is sufficient to show the Hessian is positive semi-definite.
+The Hessian of $f$ is
+$$\nabla^2f(x)=A^TA$$
+For general $A$, $A^TA$ will be positive semi-definite.
+Therefore $f$ is convex, which is the requested result.\hfill\qed\kern3pt
+
+{\bf b)}\hskip2mm
+
+
+{\bf c)}\hskip2mm
 \bye
