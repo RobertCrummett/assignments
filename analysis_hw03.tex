@@ -64,9 +64,23 @@ So since this is the case, I invoke the LDCT
 $$\lim_{k\to\infty}\int_Ef_k(x)\buildrel\rm LDCT\over =\int_E\lim_{k\to\infty}f_k(x)=\int_E0=0$$
 Which is the second requested result.\hfill\qed\kern3pt{}
 
+
 \eject
 {\bf Problem 4}
 
 
+Let's suppose that for some measurable subset $E_0$ of $E$ that $\int_{E_0}|f|<\varepsilon$.
+It is given that $|f|$ can be represented as $|f|=\lim_{k\to\infty}f_k$ for simple functions $f_k:E\mapsto[0,\infty]$.
+In light of this,
+$$\int_{E_0}|f|=\int_{E_0}\lim_{k\to\infty}f_k<\varepsilon.$$
 
+Since $f$ is Lebesgue integrable so is $|f|$.
+And since $f\in L(E)$, it follows that we should be able to find some finite constant $a$ such that $f<a$ for all $x$ in $E$.
+These two requirements are enough to invoke the LDCT,
+$$\int_{E_0}\lim_{k\to\infty}f_k\buildrel\rm LDCT\over =\lim_{k\to\infty}\int_{E_0}f_k<\varepsilon.$$
+Since each $f_k$ is a simple function, taking on a finite number of values $a_1,a_2,\ldots a_i$
+$$\lim_{k\to\infty}\int_{E_0}f_k=\lim_{k\to\infty}\int_{\bigcup_i E_i}f_k=\lim_{k\to\infty}\sum_i\int_{E_i}f_k=\lim_{k\to\infty}\sum_ia_{i,k}|E_i|<\varepsilon.$$
+The second equality holds because of additivity of the Lebesgue measure for disjoint sets.
+In order to satisfy the final inequality, $|E_i|$ must be able to be made arbitrarily small.
+So this probably means that the sum of these things needs to be less than $\delta$, but I do not quite understand how to prove this final point.
 \bye
