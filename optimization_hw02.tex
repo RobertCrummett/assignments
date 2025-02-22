@@ -1,4 +1,4 @@
-\footline={2/20/2025\hfill Page \folio}
+\footline={2/21/2025\hfill Page \folio}
 \def\reals{I\kern-4pt R}
 \def\nats{I\kern-4pt N}
 \let\oldexists\exists \def\exists{\oldexists \;}
@@ -8,7 +8,7 @@
 \parskip 2mm
 
 
-EENG~521: Homework~2\hfill Robert~Nate~Crummet\kern-1pt t
+EENG~521: Homework~2\hfill Robert~Nate~Crummett
 \smallskip
 \hrule
 
@@ -80,14 +80,74 @@ Therefore there is no global minimizer.\hfill\qed\kern3pt
 
 
 {\bf a)}\hskip2mm
-To show that $f$ is convex, it is sufficient to show the Hessian is positive semi-definite.
+To show that $f$ is convex, it's sufficient to show the Hessian is positive semi-definite.
 The Hessian of $f$ is
 $$\nabla^2f(x)=A^TA$$
-For general $A$, $A^TA$ will be positive semi-definite.
-Therefore $f$ is convex, which is the requested result.\hfill\qed\kern3pt
+For general $A$, the Hessian $A^TA$ will be positive semi-definite. Therefore $f$ is convex, which is the requested result.\hfill\qed\kern3pt
 
 {\bf b)}\hskip2mm
-
+The gradient of $f$ is
+$$\nabla f(x)=A^TAx-A^Ty.$$
+By definition, the global minimizer of a convex function is at a singular point.
+If $\nabla f(x)=0$, $A^TAx-A^Ty=0$ which leads to the linear system given.
+Irrespective if the solution is unique or not, any $x$ satisfying this linear system is a minimizer of the function $f$.
+Since $f$ is convex, any minimizer is equal to the global minimizer.\hfill\qed\kern3pt
 
 {\bf c)}\hskip2mm
+If $A^TA$ is singular (which possible since the Hessian of $f$ can only be guaranteed to be a positive semi-definite matrix), the linear system has no unique solution.
+But if $A^TA$ has full column rank, it is non-singular.
+Therefore the Hessian will be invertible and the linear system has a unique solution.
+In this case, the conclusion above can be strengthened: for a Hessian with full column-rank, a solution $x$ to the linear system is the unique global minimizer.\hfill\qed\kern3pt
+
+
+\medskip{\bf Problem 3}
+
+
+{\bf a)}\hskip2mm
+The function $f(u,v)={1\over2}\|A-uv^T\|^2_F$ can be rewritten as
+$$f(u,v)={1\over2}{\rm tr}((A-uv^T)^T(A-uv^T))={1\over2}{\rm tr}(A^TA-vu^TA-A^Tuv^T+vu^Tuv^T)$$
+Now the gradient of $f(u,v)$ with respect to the vector $u$ is
+$$\eqalign{\nabla_uf(u,v)&={1\over2}\nabla_u({\rm tr}(A^TA)-{\rm tr}(vu^TA)-{\rm tr}(A^Tuv^T)+{\rm tr}(vu^Tuv^T))\cr&=-{1\over2}\nabla_u{\rm tr}(vu^TA)-{1\over2}\nabla_u{\rm tr}(A^Tuv^T)+{1\over2}\nabla_u{\rm tr}(vu^Tuv^T))\cr&=-{1\over2}\nabla_uu^TAv-{1\over2}\nabla_uv^TA^Tu+{1\over2}\nabla_uu^Tuv^Tv\cr&=-{1\over2}Av-{1\over2}Av+v^Tvu\cr&=-Av+{1\over2}(v^Tv)u}$$
+The second line follows from breaking apart the trace.
+The third line follows from the cyclic property of the trace.
+Each term has been rotated such that it is equal to a scalar quantity.
+Each argument being a scalar quantity, the trace can be discarded.
+After applying the gradient with respect to $u$, a final expression for $\nabla_uf(x)$ is arrived at.
+In very much the same manner, an expression for the gradient of $f$ with respect to $v$ is derived:
+$$\nabla_vf(u,v)=-u^TA+{1\over2}(u^Tu)v$$
+Combining the two expressions yeilds the gradient of $f$
+$$\nabla f(u,v)=\left[\matrix{\nabla_uf(u,v)\cr\noalign{\kern2pt}\nabla_vf(u,v)}\right]=\left[\matrix{-Av+{1\over2}(v^Tv)u\cr\noalign{\kern2pt}-u^TA+{1\over2}(u^Tu)v}\right]\eqno\qed\kern3pt$$
+
+\eject
+{\bf b)}\hskip2mm
+To locate the global minimizers, it is first necessary to find the stationary points.
+The stationary points of $f(u,v)$ will be where the gradient is equal to zero
+$$\nabla f(u,v)=\left[\matrix{\nabla_uf(u,v)\cr\noalign{\kern2pt}\nabla_vf(u,v)}\right]=\left[\matrix{4u(u^2-4)\cr\noalign{\kern2pt}2v}\right]=0$$
+By examination this condition is satisfied only for $v=0$ and $u=0$, 2, and $-$2.
+Therefore there are two possible stationary points.
+To determine if the stationary points are minimizers, the Hessian must be examined:
+$$\nabla^2f(u,v)=\left[\matrix{12u^2-16&0\cr\noalign{\kern2pt}0&2}\right]$$
+At the stationary points where $u=2$ and $-$2, the Hessian is positive definite.
+Therefore these points are minimizers.
+At $u=0$ however, the Hessian is indefinite.
+This indicates that this stationary point is a saddle point.
+Therefore, $f$ has two global minimizers and one saddle point.\hfill\qed\kern3pt
+
+{\bf c)}\hskip2mm
+
+{\bf i.}\hskip2mm
+The gradient of $f(u,v)$ is
+$$\nabla f(u,v)=\left[\matrix{\nabla_ug(u)+\gamma Bv\cr\noalign{\kern2pt}\nabla_vh(v)+\gamma B^Tu}\right]$$
+and the Hessian is
+$$\nabla^2f(u,v)=\left[\matrix{\nabla^2_ug(u)&0\cr\noalign{\kern2pt}0&\nabla^2_vh(v)}\right]\eqno\qed\kern3pt$$
+
+{\bf ii)}\hskip2mm
+Because $g$ and $h$ are convex, $f$ is also convex.
+The convexity of $g$ and $h$ implies that their Hessians have non-negative eigenvalues.
+So when the diagonalized matrices $g$ and $h$ are assembled into the Hessian of $f$, it is apparent that this matrix also possesses non-negative eigenvalues.
+
+If $\gamma=0$, the stationary points of $f$ is the intersection of the stationary points of $g$ and $h$.
+So because any stationary point of $f$ is the stationary point of a convex function.
+The Hessian is positive semi-definite irrespective of $\gamma$.
+Therefore, any stationary point of $f$ is a global minimizer.\hfill\qed\kern3pt
 \bye
