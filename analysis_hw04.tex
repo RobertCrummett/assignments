@@ -1,8 +1,11 @@
-\footline={3/7/2025\hfill Page \folio}
+\input date
+
+
+\footline{\today\hfill Page \folio}
 \def\reals{I\kern-4pt R}
 \def\nats{I\kern-4pt N}
-\let\oldexists\exists \def\exists{\oldexists \;}
-\let\oldforall\forall \def\forall{\oldforall \,}
+\let\oldexists\exists\def\exists{\oldexists\;}
+\let\oldforall\forall\def\forall{\oldforall\,}
 \def\qed{\vrule height 6pt width 6pt depth 0pt}
 \parindent 0pt
 \parskip 2mm
@@ -14,4 +17,47 @@ MATH~501: Homework~4\hfill Robert~Nate~Crummett
 
 
 \medskip{\bf Problem 1}
+
+
+The three properties of a metric are 1) $d(x,x)=0$, 2) $d(x,y)=d(y,x)$, and 3) $d(x,y)\leq d(x,z)+d(z,y)$.
+$d(x,y)=\int_a^b|x(t)-y(t)|dt$ satisfies these properties.
+Clearly property one is satisfied.
+Property two follows from
+$$d(x,y)=\int_a^b|x(t)-y(t)|dt=\int_a^b|-(y(t)-x(t))|dt=\int_a^b|y(t)-x(t)|dt=d(y,x)$$
+and the third property of the metric follows from the triangle inequality
+$$\eqalign{d(x,y)=\int_a^b|x(t)-y(t)|dt&=\int_a^b|x(t)-z(t)+z(t)-y(t)|dt\cr&\leq\int_a^b|x(t)-z(t)|dt+\int_a^b|z(t)-y(t)|dt=d(x,z)+d(y,z)}$$
+So it is clear that $d(x,y)$ is a metric.
+Therefore $(C[a,b], d)$ is a metric space.\hfill\qed
+
+
+\medskip{\bf Problem 2}
+
+
+The three properties required to show $\|\cdot\|_p$ is a norm on $\ell^p$ are 1) $\|x\|_p=0$ if and only if $x=0$, 2) that $\|\lambda x\|_p=|\lambda|\|x\|_p$, and 3) that that triangle inequality is satisfied: $\|x+y\|_p\leq\|x\|_p+\|y\|_p$.
+
+
+Because the norm is a series of non-negative elements $|\xi_i|$, a norm of 0 implies that all of the elements are zero.
+And if all of the elements $\xi_i=0$, the norm on $\ell_p$ will be zero as well.
+So the first property is satisfied.
+
+
+The second property holds in a pretty straight forward manner as well
+$$\|\lambda x\|_p=(\sum^\infty_{i=1}|\lambda\xi_i|^p)^{1/p}=(\sum^\infty_{i=1}|\lambda|^p|\xi_i|^p)^{1/p}=|\lambda|(\sum^\infty_{i=1}|\xi_i|^p)^{1/p}=|\lambda|\|x\|_p$$
+
+
+The final property requires some leg work.
+I do not think we proved the hint statement in class, but I may have missed it.
+$$\eqalign{\|x+y\|_p^p&=\sum_{i=1}^\infty|\xi_i+\eta_i|^p\cr&=\sum_{i=1}^\infty|\xi_i+\eta_i||\xi_i+\eta_i|^{p-1}\cr&\leq\sum_{i=1}^\infty(|\xi_i|+|\eta_i|)|\xi_i+\eta_i|^{p-1}\cr}$$
+where this last step follows from the triangle inequality for numbers.
+Continuing,
+$$\eqalign{&=\sum_{i=1}^\infty|\xi_i||\xi_i+\eta_i|^{p-1}+\sum_{i=1}^\infty|\eta_i||\xi_i+\eta_i|^{p-1}\cr&\leq(\sum_{i=1}^\infty|\xi_i|^p)^{1/p}(\sum_{i=1}^\infty|\xi_i+\eta_i|^{(p-1)({p\over p-1})})^{({p-1\over p})}+(\sum_{i=1}^\infty|\eta_i|^p)^{1/p}(\sum_{i=1}^\infty|\xi_i+\eta_i|^{(p-1)({p\over p-1})})^{({p-1\over p})}\cr&=(\|x\|_p+\|y\|_p){\|x+y\|_p^p\over\|x+y\|_p}}$$
+H\"older's inequality was used to expand the sums in the second line.
+Finally, the last statement is enough to prove Minkowski's inequality $\|x+y\|_p\leq\|x\|_p+\|y\|_p$.
+But this is a statement of the triangle inequality for the norm $\|\cdot\|_p$, the final property of the norm.
+Therefore $\|\cdot\|_p$ is a norm on $\ell^p$.\hfill\qed
+\eject
+
+
+{\bf Problem 3}
+
 \bye
