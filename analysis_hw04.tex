@@ -27,7 +27,7 @@ $$d(x,y)=\int_a^b|x(t)-y(t)|dt=\int_a^b|-(y(t)-x(t))|dt=\int_a^b|y(t)-x(t)|dt=d(
 and the third property of the metric follows from the triangle inequality
 $$\eqalign{d(x,y)=\int_a^b|x(t)-y(t)|dt&=\int_a^b|x(t)-z(t)+z(t)-y(t)|dt\cr&\leq\int_a^b|x(t)-z(t)|dt+\int_a^b|z(t)-y(t)|dt=d(x,z)+d(y,z)}$$
 So it is clear that $d(x,y)$ is a metric.
-Therefore $(C[a,b], d)$ is a metric space.\hfill\qed
+Therefore $({\rm C}[a,b], d)$ is a metric space.\hfill\qed
 
 
 \medskip{\bf Problem 2}
@@ -77,7 +77,52 @@ This is the required result.\hfill\qed
 \medskip{\bf Problem 4}
 
 
+Let $(x_n)_{n=1}^\infty}$ be a Cauchy sequence in the normed linear space $X$.
+By the {\it Cauchiness\/} of $(x_n)_{n=1}^\infty$, for $m,n\geq N$, the elements of the sequence draw close together: $\|x_n-x_m\|\leq\varepsilon$.
+Now fix $n$, and let there be a sequence $(n_k)_{k=1}^\infty$ is a strictly inreasing positive integer sequence such that $n>n_k$.
+Now $\|x_n-x_{n_k}\|$ can be made arbitrarily small by its Cauchiness so we make it less than $1/k^2$:
+$$\|x_n-x_{n_k}\|<{1\over k^2}\eqno(2)$$
 
 
+Now let $y_k=x_{n_{k+1}}-x_{n_k}$.
+The sum $\sum_{k=1}^\infty y_k$ converges.
+This is because the the summation converges absolutely.
+This follows from taking (2) and plugging it into the abolsute sum:
+$$\sum_{k=1}^\infty|y_k|=\sum_{k=1}^\infty{1\over k^2}={\pi^2\over6}\eqno(\circ)$$
+Because the sum converges abosolutely, the plain jane version also converges.
 
+
+Now $x_{n_k}$ can be expressed in a telescoping series
+$$x_{n_k}=x_{n_1}+\sum_{j=1}^{k-1}(x_{n_{j+1}}-x_{n_j})=x_{n_1}+\sum_{j=1}^{k-1}y_k\eqno(3)$$
+So in the limit as $k$ approachs $\infty$, ($\circ$) informs me that the right hand side of (3) will converge.
+Therefore, $\lim_{k\to\infty}x_{n_k}$ will also converge.\hfill\qed
+
+
+\medskip{\bf Problem~5}
+
+
+Let $A,B\in\reals$ such that for the equivalent norms $\|\cdot\|$ and $\|\cdot\|_0$,
+$$A\|\cdot\|\leq\|\cdot\|_0\leq B\|\cdot\|\eqno(\S)$$
+
+
+First I will show that $(x_n)^\infty_{n=1}$ is Cauchy in $X$ with respect to $\|\cdot\|$ if the sequence is a Cauchy sequence in $X$ with respect to $\|\cdot\|_0$.
+Since the elements of the sequence will be Cauchy in the norm $\|\cdot\|_0$, for $m,n>N$ and $\varepsilon>0$
+$$\|x_m-x_n\|_0\leq\varepsilon$$
+\eject
+
+
+But by (\S) it stands to reason that
+$$A\|x_m-x_n\|\leq\|x_m-x_n\|_0\leq\varepsilon$$
+But this shows that the sequence is Cauchy-like in $\|\cdot\|$.
+This is the first half of the proof.
+
+
+The second half of the proof follows in largely the same manner.
+But now, let the sequence be Cauchy in $\|\cdot\|$:
+$$\|x_m-x_n\|\leq\varepsilon$$
+Again by (\S),
+$${1\over B}\|x_m-x_n\|_0\leq\|x_m-x_n\|\leq\varepsilon$$
+Therefore Cauchiness in $\|\cdot\|$ implies the same in $\|\cdot\|_0$.
+This is the second half of the proof.
+Therefore, a sequence that is Cauchy in one norm will be Cauchy in any equivlanent norm on the same space.\hfill\qed
 \bye
