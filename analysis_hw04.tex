@@ -46,7 +46,6 @@ $$\|\lambda x\|_p=(\sum^\infty_{i=1}|\lambda\xi_i|^p)^{1/p}=(\sum^\infty_{i=1}|\
 
 
 The final property requires some leg work.
-I do not think we proved the hint statement in class, but I may have missed it.
 $$\eqalign{\|x+y\|_p^p&=\sum_{i=1}^\infty|\xi_i+\eta_i|^p\cr&=\sum_{i=1}^\infty|\xi_i+\eta_i||\xi_i+\eta_i|^{p-1}\cr&\leq\sum_{i=1}^\infty(|\xi_i|+|\eta_i|)|\xi_i+\eta_i|^{p-1}\cr}$$
 where this last step follows from the triangle inequality for numbers.
 Continuing,
@@ -59,5 +58,26 @@ Therefore $\|\cdot\|_p$ is a norm on $\ell^p$.\hfill\qed
 
 
 {\bf Problem 3}
+
+
+By definition, a Cauchy sequence is one for which for $\varepsilon>0$ there exist $m,n>N(\varepsilon)$ such that
+$$d(x_m,x_n)\leq\varepsilon$$
+It is given that $(x_n)_{n=1}^\infty$ is a subsequence converging to $x\in X$, or that for some $\varepsilon>0$,
+$$d(x_{n_k},x)\leq\varepsilon\eqno(*)$$
+Given the previous two statements, we are required to show that
+$$d(x_n,x)\leq\varepsilon\eqno(1)$$
+Rewriting (1) as $d(x_n,x)\leq d(x_n,x_{n_k}) + d(x_{n_k},x)$, ($*$) informs me that the second term on the right hand side can be made smaller than $\varepsilon$ with a suitable choice of $N$.
+Likewise, since $n_k$ increases with $k$, we can select a $k$ such that the first term is arbirarily small, because it will behave ``Cauchily''
+$$d(x_n,x_{n_k})\leq\varepsilon$$
+Therefore, we choose $C=\max(n_k,N)$ and for this choice let $n\geq C$ so that $d(x_n,x)<2\varepsilon$.
+Since $\varepsilon>0$ can be made as small as necessary, it is clear that (1) holds.
+This is the required result.\hfill\qed
+
+
+\medskip{\bf Problem 4}
+
+
+
+
 
 \bye
