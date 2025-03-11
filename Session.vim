@@ -1,5 +1,10 @@
+" Since the directory tree is not very deep,
+" but it is annoying to manually specify
+" the directory each time, I let the path
+" search recursively.
 set path+=**
-let &wildignore=join(map(split(substitute(substitute(
-            \ netrw_gitignore#Hide(), '\.\*', '*', 'g'), '\\.', '.', 'g'), ','),
-            \ "v:val.','.v:val.'/'"), ',')
-let g:netrw_list_hide=netrw_gitignore#Hide() .. '.*\.swp$'
+" Now we use the `.gitignore` file to hide
+" file types from the wildmenu that are
+" not relevant --- that is, everything 
+" besides `.tex` files
+set wildignore+=**/*.log,**/*.pdf,**/.git/*
