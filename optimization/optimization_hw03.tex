@@ -15,6 +15,30 @@ EENG~521: Homework~3\hfill Robert~Nate~Crummett
 \medskip{\bf Problem~1}
 
 
+The sequence $x_k=1+0.5^{2^k}$ converges to 1 quadratically.
+Let the error in the sequece be $e_k=1-x_k=-0.5^{2^k}$.
+That this error shrinks quadraticlly can be seen by analyzing the decrease in the magnitude of the error.
+$$e_{k+1}=-0.5^{2^{k+1}}=-0.5^{2^k\cdot 2}=e_k^2$$
+Therefore, at each iteration $k+1$, the error is proportional to the square of the previous error $e_k$.\hfill\qed\kern3pt
 
 
+\medskip{\bf Problem~2}
+
+
+The limit of the sequence $x_k={1\over k!}$ is 0, and the series approaches 0 superlinearly.
+As before, I will observe the error term $e_k=0-x_k=-{1\over k!}$
+The next error term can be expressed as
+$$e_{k+1}=-{1\over(k+1)!}=-{1\over k!(k+1)}={e_k\over(k+1)}$$
+As $k$ goes to infinity,
+$$\lim_{k\to\infty}{e_{k+1}\over e_k}=\lim_{k\to\infty}{1\over k+1}=0\eqno(1)$$
+This shows that the rate of convergence is faster than linear, because linear convergence would be proportional to a positive constant, not zero.
+However, because the limit (1) is not proportional to $e_k$, the series does not converge quadratically.
+Beause the convergenve is faster than linear, but slower than quadratic, the series converges superlinearly.\hfill\qed\kern3pt
+
+
+\medskip{\bf Problem~3}
+
+
+The gradient and Hessian of $f_\epsilon$ are
+$$\nabla f_\epsilon=\nabla f+{\epsilon\over R^2}x\qquad{\rm and}\qquad\nabla^2f_\epsilon=\nabla^2f+{\epsilon\over R^2}$$
 \bye
