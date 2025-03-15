@@ -1,4 +1,4 @@
-\input ../common/date.tex
+\input common/date.tex
 
 
 \footline{\today\hfill Page~\folio}
@@ -40,17 +40,40 @@ Beause the convergenve is faster than linear, but slower than quadratic, the ser
 
 
 {\bf a)} The gradient and Hessian of $f_\epsilon$ are
-$$\nabla f_\epsilon=\nabla f+{\epsilon\over R^2}x\qquad{\rm and}\qquad\nabla^2f_\epsilon=\nabla^2f+{\epsilon\over R^2}$$
+$$\nabla f_\epsilon=\nabla f+{\epsilon\over R^2}x\qquad{\rm and}\qquad\nabla^2f_\epsilon=\nabla^2f+{\epsilon\over R^2}I$$
 respectively.
-Since $f(x)$ is given as convex, we know $\nabla^2f(x)\succeq0$. Therefore, $\nabla^2f_\epsilon(x)\succeq{\epsilon\over R^2}$.
+Since $f(x)$ is given as convex, we know $\nabla^2f(x)\succeq0$. Therefore, $\nabla^2f_\epsilon(x)\succeq{\epsilon\over R^2}I$, since each of the eigenvalues of $\nabla^2f_\epsilon$ are all ${\epsilon\over R^2}$ larger than those of $\nabla^2f$.
 But this is the definition of a strongly convex function, so $f_\epsilon$ is strongly convex.
 Since $f_\epsilon$ is strongly convex, any minimizer is the unique global minimizer.
 Therefore, $x_\epsilon$ is the unique global minimizer.\hfill\qed\kern3pt
 
 
-{\bf b)} I am asked to prove $f(z)-f(x^*)\leq f_\epsilon(z)-f_\epsilon(x^\epsilon)+{\epsilon\over2}$.
+{\bf b)} We are given that $f_\epsilon(x)=f(x)+{\epsilon\over2R^2}\|x\|^2_2$, so substituting this yields
+$$-f(x^*)\leq{\epsilon\over2R^2}\|z\|^2_2-f(x^\epsilon)-{\epsilon\over2R^2}\|x^\epsilon\|^2_2+{\epsilon\over2}$$
+where $f(z)$ cancelled on both sides.
+Now the norm terms on the right hand side can be upper bounded.
+Because the smallest $\|z\|^2_2-\|x^\epsilon\|^2_2$ is for $z=0$ and $x^\epsilon=R$,
+$$-f(x^*)\leq{\epsilon\over2R^2}\|z\|^2_2-f(x^\epsilon)-{\epsilon\over2R^2}\|x^\epsilon\|^2_2+{\epsilon\over2}\leq-f(x^\epsilon)+{\epsilon\over2}+{\epsilon\over2}=-f(x^\epsilon)+\epsilon$$
+So we have shown $f(x^\epsilon)-f(x^*)\leq\epsilon$.
+This is a true statement, because $f$ was specified as a smooth function.
+Therefore the initial inequality is valid.\hfill\qed\kern3pt
 
-First, 
 
-
+{\bf c)} From slide 5.29, $f_\epsilon(x_k)-f_\epsilon(x^\epsilon)\leq\left(1-{m\over L}\right)^k(f_\epsilon(x_0)-f_\epsilon(x^\epsilon))$.
+Part a allows us to say $f_\epsilon$ has convexity $m={\epsilon\over R^2}$.
+Thus
+$$f_\epsilon(x_k)-f_\epsilon(x^\epsilon)\leq\left(1-{\epsilon\over R^2L}\right)^k(f_\epsilon(x_0)-f_\epsilon(x^\epsilon))=\left({R^2L-\epsilon\over R^2L}\right)^k(f_\epsilon(x_0)-f_\epsilon(x^\epsilon))$$
+Now I am asked to solve for $k$ such that the left hand side is bounded above by $\epsilon\over2$:
+$${\epsilon\over2}\leq\left({R^2L-\epsilon\over R^2L}\right)^k(f_\epsilon(x_0)-f_\epsilon(x^\epsilon))$$
+The maximum disance between the optimal value and the starting value of $f_\epsilon$ is $R$. Therefore
+$${\epsilon\over2}\leq\left({R^2L-\epsilon\over R^2L}\right)^kR$$
+Bow we can solve for $k$. Taking the logarithm of both sides after moveing $R$ to the other side,
+$$\log\left({\epsilon\over2R}\right)\leq k\log\left({R^2L-\epsilon\over R^2L}\right)$$
+Now multiplying both sides by negative one and using the logarithm identity provided in the hint
+$$-\log\left({\epsilon\over2R}\right)\geq -k\log\left({R^2L-\epsilon\over R^2L}\right)\geq k{\epsilon\over R^2L}$$
+Finally,
+$${R^2L\over\epsilon}\log\left({2R\over\epsilon}\right)\geq k$$
+This is not the correct bound on $k$ --- however, this is the best I have for right now.
+Encouragingly, this expression does not look very different from the provided solution, so I must have made a couple small errors somewhere in the derivation.
+In broad strokes, the proof provided is probably close.\hfill\qed\kern3pt
 \bye
