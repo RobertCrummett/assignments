@@ -39,6 +39,18 @@ Beause the convergenve is faster than linear, but slower than quadratic, the ser
 \medskip{\bf Problem~3}
 
 
-The gradient and Hessian of $f_\epsilon$ are
+{\bf a)} The gradient and Hessian of $f_\epsilon$ are
 $$\nabla f_\epsilon=\nabla f+{\epsilon\over R^2}x\qquad{\rm and}\qquad\nabla^2f_\epsilon=\nabla^2f+{\epsilon\over R^2}$$
+respectively.
+Since $f(x)$ is given as convex, we know $\nabla^2f(x)\succeq0$. Therefore, $\nabla^2f_\epsilon(x)\succeq{\epsilon\over R^2}$.
+But this is the definition of a strongly convex function, so $f_\epsilon$ is strongly convex.
+Since $f_\epsilon$ is strongly convex, any minimizer is the unique global minimizer.
+Therefore, $x_\epsilon$ is the unique global minimizer.\hfill\qed\kern3pt
+
+
+{\bf b)} I am asked to prove $f(z)-f(x^*)\leq f_\epsilon(z)-f_\epsilon(x^\epsilon)+{\epsilon\over2}$.
+
+First, 
+
+
 \bye
