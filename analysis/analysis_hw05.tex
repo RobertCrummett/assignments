@@ -1,0 +1,65 @@
+\input common/date.tex
+
+
+\footline{\today\hfill Page~\folio}
+\def\reals{I\kern-4pt R}
+\def\nats{I\kern-4pt N}
+\let\oldexists\exists\def\exists{\oldexists\;}
+\let\oldforall\forall\def\forall{\oldforall\,}
+\def\qed{\vrule height 6pt width 6pt depth 0pt}
+\def\esssup{{\rm ess}\sup}
+\def\almosteverywhere{\,\,\mu\hbox{\kern1pt\rm-\kern1pt a.e.}}
+\parindent 0pt
+\parskip 2mm
+
+
+MATH~501: Homework~5\hfill Robert~Nate~Crummett
+\smallskip
+\hrule
+
+
+\medskip{\bf Problem~1, Part~1}
+
+Need to show that $\|f\|_\infty=\esssup|f|$ is a norm.
+
+
+{\bf a)} Show $\|f\|_\infty=0\Leftrightarrow f=0$. 
+
+$(\Leftarrow)$ Let $f=0$.
+If $f=0$ then it is bounded above by $0$.
+But this is the essential supremum.
+Therefore $f=0$ implies that $\|f\|_\infty=0$.
+
+$(\Rightarrow)$ Let $\|f\|_\infty=0$.
+Then 
+$$\|f\|_\infty=\esssup|f|=\inf\left\{\alpha:\left|\left\{x\in E:f(x)>\alpha\right\}\right|=0\almosteverywhere\right\}=0.$$
+Which means that the function has non-zero measure only at or below zero.
+Since $f$ cannot change sign, and $|E|>0$, the only way that $f$ can have an infinty norm equal to zero is if the function $f$ equals zero almost everywhere.
+This is what was required of me to show for part a.
+
+{\bf b)} Show $\|\lambda f\|_\infty=|\lambda|\|f\|_\infty$. 
+$$\|\lambda f\|_\infty=\esssup|\lambda f|=|\lambda|\esssup|f|=|\lambda|\|f\|_\infty.$$
+
+{\bf c)} Show $\|f+g\|_\infty\leq\|f\|_\infty+\|g\|_\infty$.
+
+$$\|f+g\|_\infty=\esssup|f+g|\leq\esssup|f|+\esssup|g|=\|f\|_\infty+\|g\|_\infty.$$
+
+Therefore, $\|f\|_\infty$ is a norm.\hfill\qed\kern3pt
+
+\medskip{\bf Problem~1, Part~2}
+
+To show $L^\infty$ is a Banach space with $\|f\|_\infty$, I need to show it is complete.
+
+Select a Cauchy sequence $f_n$ in $L^\infty$.
+Now select a subsequence of $f_n$ such that for a strictly increasing sequence of integers $n_j$ such that
+$$\|f_{n_{j+1}}-f_{n_j}\|_\infty\leq{1\over2^j}.$$
+Now define
+$$F_m(x)=|f_{n_1}|+\sum^m_{j=1}|f_{n_{j+1}}-f_{n_j}|,$$
+which is the abolute value of the telescoping series equal to $f_{n_{m+1}}$.
+The limit of this sequence is $F(x)=\lim_{m\to\infty}F_m(x)$.
+In the infinity norm,
+$$\|F\|_\infty\leq\|f_{n_1}\|_\infty+\sum_{j=1}^\infty\|f_{n_{j+1}}-f_{n_j}\|_\infty=\|f_{n_1}\|_\infty+1.$$
+This means that the absolute series $F_m(x)$ is upper bounded for every $m$.
+Since the series is upper bounded and strictly increasing, it must converge in the infinity norm.
+Since the absolute telescoping series $F_m(x)$ converges in the infinite norm, the non-absolute value telescoping series for $f_{n_{m+1}}$ converges abolutely to $f$ in the infinite norm.
+\bye
