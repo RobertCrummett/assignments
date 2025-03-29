@@ -34,7 +34,7 @@ $(\Rightarrow)$ Let $\|f\|_\infty=0$.
 Then 
 $$\|f\|_\infty=\esssup|f|=\inf\left\{\alpha:\left|\left\{x\in E:f(x)>\alpha\right\}\right|=0\almosteverywhere\right\}=0.$$
 Which means that the function has non-zero measure only at or below zero.
-Since $f$ cannot change sign, and $|E|>0$, the only way that $f$ can have an infinty norm equal to zero is if the function $f$ equals zero almost everywhere.
+Since $f$ cannot change sign, and $|E|>0$, the only way that $f$ can have an infinity norm equal to zero is if the function $f$ equals zero almost everywhere.
 This is what was required of me to show for part a.
 
 {\bf b)} Show $\|\lambda f\|_\infty=|\lambda|\|f\|_\infty$. 
@@ -53,13 +53,27 @@ To show $L^\infty$ is a Banach space with $\|f\|_\infty$, I need to show it is c
 Select a Cauchy sequence $f_n$ in $L^\infty$.
 Now select a subsequence of $f_n$ such that for a strictly increasing sequence of integers $n_j$ such that
 $$\|f_{n_{j+1}}-f_{n_j}\|_\infty\leq{1\over2^j}.$$
-Now define
-$$F_m(x)=|f_{n_1}|+\sum^m_{j=1}|f_{n_{j+1}}-f_{n_j}|,$$
-which is the abolute value of the telescoping series equal to $f_{n_{m+1}}$.
-The limit of this sequence is $F(x)=\lim_{m\to\infty}F_m(x)$.
-In the infinity norm,
-$$\|F\|_\infty\leq\|f_{n_1}\|_\infty+\sum_{j=1}^\infty\|f_{n_{j+1}}-f_{n_j}\|_\infty=\|f_{n_1}\|_\infty+1.$$
-This means that the absolute series $F_m(x)$ is upper bounded for every $m$.
-Since the series is upper bounded and strictly increasing, it must converge in the infinity norm.
-Since the absolute telescoping series $F_m(x)$ converges in the infinite norm, the non-absolute value telescoping series for $f_{n_{m+1}}$ converges abolutely to $f$ in the infinite norm.
+This is possible because $f_n$ is Cauchy.
+
+I claim that the limit
+$$f=\lim_{m\to\infty}f_{n_m}$$
+exists almost everywhere in $L^\infty$.
+This is because the series
+$$f_{n_1}+\sum_{j=1}^m(f_{n_{m+1}}-f_{n_m})$$
+converges absolutely in $L^\infty$.
+
+To prove this last statement, define the absolute telescoping series for $f_{n_{m+1}}$ as $F_m$:
+$$F_m(x)=|f_{n_1}|+\sum^m_{j=1}|f_{n_{j+1}}-f_{n_j}|.$$
+In the limit as $m\to\infty$, the absolute telescoping series $F_m$ approaches $F$.
+The limit $F$ is bounded above in $L^\infty$:
+$$\|F\|_\infty\leq\|f_{n_1}\|_\infty+\sum_{j=1}^\infty\|f_{n_{j+1}}-f_{n_j}\|_\infty=\|f_{n_1}\|_\infty+1<\infty.$$
+Therefore, where the limit of $F_m$ exists, the limit is finite.
+Because the series $F_m$ converges almost everywhere in $L^\infty$, the series $f_{n_1}+\sum_{j=1}^m(f_{n_{m+1}}-f_{n_m})$ will converge absolutely almost everywhere in $L^\infty$.
+
+So we have shown that $f$, the limit of $f_{n_m}$, exists almost everywhere in $L^\infty$.
+Now let the Cauchy sequence
+$$\|f_{n_{j+1}}-f\|_\infty\leq\varepsilon.$$
+As $j\to\infty$, the sequence will go to zero in $L^\infty$ since $f<\infty$.
+Moreover, since $f_n$ is Cauchy and a subsequence converges to $f$, the entire sequence also converges to $f$.
+Since $f$ is in $L^\infty$, except possibly over a set of measure zero, we have shown that $L^\infty$ with the norm $\|f\|_\infty$ is a Banach space.\hfill\qed\kern3pt
 \bye
